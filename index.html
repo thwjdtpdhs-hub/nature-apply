@@ -232,7 +232,7 @@
         <!-- Open Time Countdown Banner -->
         <div id="countdownBanner" class="mt-6 p-5 bg-amber-500 text-white rounded-2xl shadow-md text-center">
             <div class="text-xs font-bold uppercase tracking-wider text-amber-100 mb-1">⏰ 접수 개시 대기 중</div>
-            <h4 class="text-lg font-extrabold mb-1">2026년 9월 18일(금) 03시 20분 접수 오픈</h4>
+            <h4 class="text-lg font-extrabold mb-1">2026년 9월 18일(금) 03시 55분 접수 오픈</h4>
             <div id="countdownTimer" class="text-2xl font-mono font-black text-amber-900 bg-white/90 py-2 px-4 rounded-xl inline-block mt-1 shadow-inner">
                 남은 시간 계산 중...
             </div>
@@ -382,8 +382,8 @@
         // Capacity per session
         const MAX_CAPACITY = 32;
 
-        // Registration Open Time: September 18, 2026, 03:20 KST
-        const OPEN_TIME = new Date('2026-09-18T03:20:00+09:00');
+        // Registration Open Time: September 18, 2026, 03:55 KST
+        const OPEN_TIME = new Date('2026-09-18T03:55:00+09:00');
 
         // Session Constants
         const SESSIONS = [
@@ -458,7 +458,7 @@
                 if (countdownBanner) countdownBanner.classList.remove('hidden');
                 if (submitBtn) {
                     submitBtn.disabled = true;
-                    submitBtnText.innerText = '🔒 접수 시작 대기 중 (03:20 오픈)';
+                    submitBtnText.innerText = '🔒 접수 시작 대기 중 (03:55 오픈)';
                 }
                 const hours = Math.floor(diff / (1000 * 60 * 60));
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
@@ -574,7 +574,7 @@
 
             // Check timing restriction
             if (!isRegistrationOpen()) {
-                showToast('❌ 아직 접수 시간이 아닙니다. (2026년 9월 18일 03:20 오픈)', 'rose');
+                showToast('❌ 아직 접수 시간이 아닙니다. (2026년 9월 18일 03:55 오픈)', 'rose');
                 return;
             }
 
