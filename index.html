@@ -50,191 +50,166 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-4xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 flex-grow">
+    <main class="max-w-4xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 flex-grow relative">
 
-        <!-- Info & Policies Banner -->
-        <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-5 sm:p-6 mb-8">
-            <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2 mb-4">
-                <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                프로그램 운영 및 참가 안내
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
-                <div class="flex items-start gap-2.5">
-                    <span class="text-emerald-500 mt-0.5">🗓️</span>
-                    <div>
-                        <strong class="text-gray-900">운영 일시:</strong> 2026. 10. 17.(토) ~ 10. 18.(일) [2일간]
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-emerald-500 mt-0.5">📍</span>
-                    <div>
-                        <strong class="text-gray-900">장소:</strong> 옥룡면 솔밭공원 (동천내하천섬공원)
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-emerald-500 mt-0.5">👶</span>
-                    <div>
-                        <strong class="text-gray-900">참가 대상:</strong> 만 3~5세 유아 동반 가족
-                    </div>
-                </div>
-                <div class="flex items-start gap-2.5">
-                    <span class="text-emerald-500 mt-0.5">👨‍👩‍👧</span>
-                    <div>
-                        <strong class="text-gray-900">모집 인원:</strong> 회차당 <span class="text-emerald-700 font-bold">선착순 32가족</span> (총 128가족)
-                    </div>
-                </div>
+        <!-- Pre-open Lock Screen (Shown before registration opens) -->
+        <div id="preOpenScreen" class="bg-white rounded-3xl shadow-lg border border-emerald-100 p-8 sm:p-12 text-center my-6">
+            <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-5 text-4xl shadow-inner animate-bounce">
+                ⏰
             </div>
+            <span class="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full mb-3">
+                접수 개시 전
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-2">
+                아직 신청 전입니다
+            </h2>
+            <p class="text-gray-600 text-sm sm:text-base mb-6 max-w-md mx-auto">
+                2026년 9월 18일(금) 오전 4시 5분부터 참가 신청이 가능합니다.<br>
+                시간이 되면 자동으로 신청 화면으로 전환됩니다.
+            </p>
 
-            <!-- Essential Rules Box -->
-            <div class="mt-4 p-4 bg-amber-50 rounded-xl border border-amber-200 text-xs sm:text-sm text-amber-900">
-                <p class="font-bold mb-1.5 flex items-center gap-1.5 text-amber-900">
-                    <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-                    안내사항
-                </p>
-                <ul class="list-disc pl-5 space-y-1 text-amber-800">
-                    <li><strong>연령 제한:</strong> 유아의 안전한 체험을 위해 <strong class="underline">만 3~5세 유아로 참가가 제한</strong>됩니다. (대상 연령 외 영아 및 초등학생 형제·자매 동반 불가)</li>
-                    <li><strong>중복 신청 제한:</strong> 1가족당 <strong class="underline">1개 회차만 신청 가능</strong>하며, 중복 신청 시 전체 신청건이 자동 취소 처리됩니다.</li>
-                    <li><strong>자동 마감:</strong> 회차별 32가족 선착순 마감 시 해당 항목 선택이 제한됩니다.</li>
-                </ul>
+            <div class="bg-amber-50 rounded-2xl p-6 max-w-sm mx-auto border border-amber-200 shadow-sm">
+                <div class="text-xs text-amber-700 font-bold mb-1">접수 오픈까지 남은 시간</div>
+                <div id="countdownTimerOverlay" class="text-2xl sm:text-3xl font-mono font-black text-amber-900">
+                    계산 중...
+                </div>
             </div>
         </div>
 
-        <!-- Live Status Dashboard -->
-        <div class="mb-8">
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-                    <span class="relative flex h-3 w-3">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                    </span>
-                    회차별 실시간 접수 현황
+        <!-- Main Application View (Hidden until registration opens) -->
+        <div id="mainAppContent" class="hidden space-y-6">
+            <!-- Info & Policies Banner -->
+            <div class="bg-white rounded-2xl shadow-sm border border-emerald-100 p-5 sm:p-6">
+                <h3 class="text-lg font-bold text-emerald-900 flex items-center gap-2 mb-4">
+                    <svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    프로그램 운영 및 참가 안내
                 </h3>
-                <span class="text-xs text-gray-500">정원: 회차당 32가족</span>
+                
+                <div class="text-xs sm:text-sm text-gray-700 space-y-2 leading-relaxed">
+                    <p class="font-bold text-emerald-800">📌 안내사항</p>
+                    <ul class="list-disc pl-5 space-y-1.5 text-gray-600">
+                        <li><strong>신청 대상:</strong> 관내 유치원 및 어린이집에 재학 중인 만 3~5세 유아 및 보호자 (가족 단위)</li>
+                        <li><strong>접수 기준:</strong> <strong>선착순 모집 (회차별 32가족 제한)</strong>, 정원 초과 시 자동 마감됩니다.</li>
+                        <li><strong>신청 제한:</strong> 중복 신청 방지를 위해 <strong>1가족당 1회차만 선택 가능</strong>합니다.</li>
+                        <li><strong>준비물 및 위치:</strong> 옥룡면 솔밭공원 / 편한 복장 및 물, 모자 준비</li>
+                    </ul>
+                </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" id="sessionStatusGrid">
                 <!-- Session Status Cards populated by JS -->
             </div>
-        </div>
 
-        <!-- Registration Form -->
-        <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
-            <h3 class="text-xl font-bold text-gray-900 pb-4 mb-6 border-b border-gray-100 flex items-center justify-between">
-                <span>📝 참가 신청서 작성</span>
-                <span class="text-xs font-normal text-rose-500">* 모든 항목 필수 입력</span>
-            </h3>
+            <!-- Registration Form -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+                <h3 class="text-xl font-bold text-gray-900 pb-4 mb-6 border-b border-gray-100 flex items-center justify-between">
+                    <span>📝 참가 신청서 작성</span>
+                    <span class="text-xs font-normal text-rose-500">* 모든 항목 필수 입력</span>
+                </h3>
 
-            <form id="registrationForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                
-                <!-- Child Info Section -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <form id="registrationForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    
+                    <!-- Child Info Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="childName" class="block text-sm font-semibold text-gray-700 mb-1">
+                                유아 성명 <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="childName" required placeholder="예: 홍길동"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                        <div>
+                            <label for="childBirth" class="block text-sm font-semibold text-gray-700 mb-1">
+                                유아 생년월일 <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="childBirth" required maxlength="8" placeholder="예: 20210510 (8자리)"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Parent & Contact Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="parentName" class="block text-sm font-semibold text-gray-700 mb-1">
+                                보호자 성명 및 관계 <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="text" id="parentName" required placeholder="예: 홍길동 (부/모)"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">
+                                보호자 휴대전화 번호 <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="tel" id="phone" required placeholder="예: 010-1234-5678" oninput="autoHyphen(this)" maxlength="13"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Institution -->
                     <div>
-                        <label for="childName" class="block text-sm font-semibold text-gray-700 mb-1">
-                            유아 성명 <span class="text-rose-500">*</span>
+                        <label for="orgName" class="block text-sm font-semibold text-gray-700 mb-1">
+                            소속 기관명 (유치원 / 어린이집) <span class="text-rose-500">*</span>
                         </label>
-                        <input type="text" id="childName" required placeholder="예: 홍길동"
+                        <input type="text" id="orgName" required placeholder="예: 광양OO유치원 또는 OO어린이집"
                             class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
                     </div>
+
+                    <!-- Accompanying Family Info -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="familyCount" class="block text-sm font-semibold text-gray-700 mb-1">
+                                동반 참가가족 수 (유아 포함 총 인원) <span class="text-rose-500">*</span>
+                            </label>
+                            <input type="number" id="familyCount" min="1" max="10" required placeholder="예: 3 (명)"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                        <div>
+                            <label for="accompanyChildBirth" class="block text-sm font-semibold text-gray-700 mb-1">
+                                동반 유아 생년월일 <span class="text-xs font-normal text-gray-500">(해당 시 작성, 없으면 '없음')</span>
+                            </label>
+                            <input type="text" id="accompanyChildBirth" placeholder="예: 20220815 또는 없음"
+                                class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+                        </div>
+                    </div>
+
+                    <!-- Session Select Cards -->
                     <div>
-                        <label for="childBirth" class="block text-sm font-semibold text-gray-700 mb-1">
-                            유아 생년월일 <span class="text-rose-500">*</span>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            참여 희망 회차 선택 <span class="text-rose-500">*</span> (1가족당 1회차만 가능)
                         </label>
-                        <input type="text" id="childBirth" required maxlength="8" placeholder="예: 20210510 (8자리)"
-                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
-                    </div>
-                </div>
 
-                <!-- Parent & Contact Section -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label for="parentName" class="block text-sm font-semibold text-gray-700 mb-1">
-                            보호자 성명 및 관계 <span class="text-rose-500">*</span>
+                        <div class="space-y-3" id="sessionRadioContainer">
+                            <!-- Radios injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Personal Information Agreement -->
+                    <div class="pt-2">
+                        <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-600 mb-2">
+                            <p class="font-bold text-gray-800 mb-1">🔒 개인정보 수집·이용 및 사진·동영상 촬영 동의</p>
+                            <ul class="list-disc pl-4 space-y-0.5">
+                                <li><strong>수집 항목:</strong> 유아 성명, 생년월일, 보호자 성명, 연락처, 소속 기관명, 동반 가족 수, 행사 참여 활동 모습(사진·동영상)</li>
+                                <li><strong>수집 및 이용 목적:</strong> 프로그램 참가자 확인, 안내 문자 발송, 안전 관리 및 <strong>보도자료 배포 및 홍보물 제작</strong></li>
+                                <li><strong>보유 및 이용 기간:</strong> 개인정보는 행사 종료 후 1개월 이내 파기 (보도자료 및 홍보 기록용 사진·동영상은 교육청 보존 기준 적용)</li>
+                            </ul>
+                        </div>
+                        <label class="flex items-start gap-3 cursor-pointer p-3 bg-emerald-50/50 rounded-xl border border-emerald-200 hover:bg-emerald-50 transition-colors">
+                            <input type="checkbox" id="privacyAgree" required class="mt-1 h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
+                            <span class="text-xs sm:text-sm text-gray-800 font-medium leading-snug">
+                                [필수] 개인정보 수집·이용 및 보도자료 활용을 위한 사진·동영상 촬영에 동의합니다.
+                            </span>
                         </label>
-                        <input type="text" id="parentName" required placeholder="예: 홍길동 (부/모)"
-                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
                     </div>
-                    <div>
-                        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1">
-                            보호자 휴대전화 번호 <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="tel" id="phone" required placeholder="예: 010-1234-5678" oninput="autoHyphen(this)" maxlength="13"
-                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit" id="submitBtn"
+                            class="w-full py-3.5 px-6 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-base">
+                            <span id="submitBtnText">신청서 제출하기</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
                     </div>
-                </div>
-
-                <!-- Institution -->
-                <div>
-                    <label for="orgName" class="block text-sm font-semibold text-gray-700 mb-1">
-                        소속 기관명 (유치원 / 어린이집) <span class="text-rose-500">*</span>
-                    </label>
-                    <input type="text" id="orgName" required placeholder="예: 광양OO유치원 또는 OO어린이집"
-                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
-                </div>
-
-                <!-- Accompanying Family Info -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <label for="familyCount" class="block text-sm font-semibold text-gray-700 mb-1">
-                            동반 참가가족 수 (유아 포함 총 인원) <span class="text-rose-500">*</span>
-                        </label>
-                        <input type="number" id="familyCount" min="1" max="10" required placeholder="예: 3 (명)"
-                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
-                    </div>
-                    <div>
-                        <label for="accompanyChildBirth" class="block text-sm font-semibold text-gray-700 mb-1">
-                            동반 유아 생년월일 <span class="text-xs font-normal text-gray-500">(해당 시 작성, 없으면 '없음')</span>
-                        </label>
-                        <input type="text" id="accompanyChildBirth" placeholder="예: 20220815 또는 없음"
-                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all text-sm">
-                    </div>
-                </div>
-
-                <!-- Session Select Cards -->
-                <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">
-                        참여 희망 회차 선택 <span class="text-rose-500">*</span> (1가족당 1회차만 가능)
-                    </label>
-
-                    <div class="space-y-3" id="sessionRadioContainer">
-                        <!-- Radios injected by JS -->
-                    </div>
-                </div>
-
-                <!-- Personal Information Agreement -->
-                <div class="pt-2">
-                    <div class="p-4 bg-gray-50 rounded-xl border border-gray-200 text-xs text-gray-600 mb-2">
-                        <p class="font-bold text-gray-800 mb-1">🔒 개인정보 수집·이용 및 사진·동영상 촬영 동의</p>
-                        <ul class="list-disc pl-4 space-y-0.5">
-                            <li><strong>수집 항목:</strong> 유아 성명, 생년월일, 보호자 성명, 연락처, 소속 기관명, 동반 가족 수, 행사 참여 활동 모습(사진·동영상)</li>
-                            <li><strong>수집 및 이용 목적:</strong> 프로그램 참가자 확인, 안내 문자 발송, 안전 관리 및 <strong>보도자료 배포 및 홍보물 제작</strong></li>
-                            <li><strong>보유 및 이용 기간:</strong> 개인정보는 행사 종료 후 1개월 이내 파기 (보도자료 및 홍보 기록용 사진·동영상은 교육청 보존 기준 적용)</li>
-                        </ul>
-                    </div>
-                    <label class="flex items-start gap-3 cursor-pointer p-3 bg-emerald-50/50 rounded-xl border border-emerald-200 hover:bg-emerald-50 transition-colors">
-                        <input type="checkbox" id="privacyAgree" required class="mt-1 h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-gray-300 rounded">
-                        <span class="text-xs sm:text-sm text-gray-800 font-medium leading-snug">
-                            [필수] 개인정보 수집·이용 및 보도자료 활용을 위한 사진·동영상 촬영에 동의합니다.
-                        </span>
-                    </label>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="pt-2">
-                    <button type="submit" id="submitBtn"
-                        class="w-full py-3.5 px-6 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 disabled:bg-gray-400 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-base">
-                        <span id="submitBtnText">신청서 제출하기</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Open Time Countdown Banner -->
-        <div id="countdownBanner" class="mt-6 p-5 bg-amber-500 text-white rounded-2xl shadow-md text-center">
-            <div class="text-xs font-bold uppercase tracking-wider text-amber-100 mb-1">⏰ 접수 개시 대기 중</div>
-            <h4 class="text-lg font-extrabold mb-1">2026년 9월 18일(금) 03시 55분 접수 오픈</h4>
-            <div id="countdownTimer" class="text-2xl font-mono font-black text-amber-900 bg-white/90 py-2 px-4 rounded-xl inline-block mt-1 shadow-inner">
-                남은 시간 계산 중...
+                </form>
             </div>
         </div>
 
@@ -382,8 +357,8 @@
         // Capacity per session
         const MAX_CAPACITY = 32;
 
-        // Registration Open Time: September 18, 2026, 03:55 KST
-        const OPEN_TIME = new Date('2026-09-18T03:55:00+09:00');
+        // Registration Open Time: September 18, 2026, 04:05 KST
+        const OPEN_TIME = new Date('2026-09-18T04:05:00+09:00');
 
         // Session Constants
         const SESSIONS = [
@@ -403,29 +378,50 @@
                 if (data) {
                     return JSON.parse(data);
                 } else {
-                    // Seed initial data (31 for s1 so 1 spot remains)
                     const seedData = [];
-                    for (let i = 1; i <= 31; i++) {
-                        seedData.push({
-                            id: `REG-SEED-${1000 + i}`,
-                            createdAt: '2026. 9. 18. 오전 3:00:00',
-                            sessionId: 's1',
-                            sessionName: '1회차 (10. 17.(토) 오전 (09:20 ~ 12:00))',
-                            childName: `사전유아${i}`,
-                            childBirth: `202101${i < 10 ? '0' + i : i}`,
-                            parentName: `보호자${i}`,
-                            phone: `010-0000-${String(i).padStart(4, '0')}`,
-                            orgName: '광양유치원',
-                            familyCount: '3명',
-                            accompanyChildBirth: '없음'
-                        });
-                    }
                     localStorage.setItem(STORAGE_KEY, JSON.stringify(seedData));
                     return seedData;
                 }
             } catch (e) {
                 console.error('Storage error:', e);
                 return [];
+            }
+        }
+
+        // Save registrations
+        function saveRegistrations(regs) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(regs));
+            renderApp();
+        }
+
+        // Check if registration is open
+        function isRegistrationOpen() {
+            return new Date() >= OPEN_TIME;
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = OPEN_TIME - now;
+            const timerOverlayEl = document.getElementById('countdownTimerOverlay');
+            const preOpenScreen = document.getElementById('preOpenScreen');
+            const mainAppContent = document.getElementById('mainAppContent');
+
+            if (diff <= 0) {
+                if (preOpenScreen) preOpenScreen.classList.add('hidden');
+                if (mainAppContent) mainAppContent.classList.remove('hidden');
+            } else {
+                if (preOpenScreen) preOpenScreen.classList.remove('hidden');
+                if (mainAppContent) mainAppContent.classList.add('hidden');
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                const timerString = hours > 0 
+                    ? `${hours}시간 ${minutes}분 ${seconds < 10 ? '0' : ''}${seconds}초`
+                    : `${minutes}분 ${seconds < 10 ? '0' : ''}${seconds}초`;
+
+                if (timerOverlayEl) timerOverlayEl.innerText = timerString;
             }
         }
 
